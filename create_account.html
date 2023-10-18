@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Pet Inn - Create New Account</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            margin: 0px;
+            padding: 0px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url('https://assets.brandinside.asia/uploads/2023/01/animals-cropped-scaled.jpg');
+            background-size: cover;
+        }
+        .container {
+            text-align: center;
+        }
+        .header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-start;
+            padding: 20px;
+        }
+        .logo {
+            font-size: 48px;
+            color: #fff; 
+            margin: 0;
+            padding: 10px 20px;
+            border-radius: 10px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            margin: 20px;
+        }
+        .create-account-form {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.733); 
+            text-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            color: #0f0e0e;
+            border-radius: 5px;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        .create-account-form h2 {
+            margin-top: 0;
+        }
+        .create-account-form input {
+            display: block;
+            margin-bottom: 10px;
+            padding: 5px;
+            width: 100%;
+        }
+        .create-account-form input[type="submit"] {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        .create-account-form input[type="submit"]:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">Pet Inn</div>
+        </div>
+        <form class="was-validated" onsubmit="return validateForm();">
+            <div class="create-account-form">
+                <h2>Create New Account</h2>
+                <div class="mb mt">
+                    <label for="uname" class="form-label">Username:</label>
+                    <input type="text" class="form-control" id="uname" placeholder="Enter username" name="uname" required>
+                    <div class="valid-feedback">Valid.</div>
+                    <div class="invalid-feedback">Please fill out this field.</div>
+                </div>
+                <div class="mb">
+                    <label for="email" class="form-label">Email:</label>
+                    <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" required>
+                    <div class="valid-feedback">Valid.</div>
+                    <div class="invalid-feedback" id="email-invalid-feedback">Please enter a valid email address.</div>
+                </div>
+                <div class="mb">
+                    <label for="phone" class="form-label">Mobile Number:</label>
+                    <input type="tel" class="form-control" id="phone" placeholder="Enter mobile number" name="phone" required pattern="[0-9]{10}" title="Please enter a 10-digit mobile number">
+                    <div class="valid-feedback">Valid.</div>
+                    <div class="invalid-feedback">Please enter a valid 10-digit mobile number.</div>
+                </div>
+                <div class="mb">
+                    <label for="pwd" class="form-label">Password:</label>
+                    <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd" required pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[a-z])(?=.*[^A-Za-z0-9]).{8,}$">
+                    <div class="valid-feedback">Valid.</div>
+                    <div class="invalid-feedback">Please fill out this field (password must contain at least 8 characters and [A-Z], [a-z], [0-9], and one symbol)</div>
+                    <input type="checkbox" onclick="togglePasswordVisibility()">Show Password
+                </div>            
+                <input type="submit" value="Submit" />
+            </div>
+        </form>
+    </div>
+    <script>
+        function validateForm() {
+            var phone = document.getElementById("phone").value;
+            var phoneRegex = /^[0-9]{10}$/;
+
+            if (!phoneRegex.test(phone)) {
+                alert("Invalid mobile number format");
+                return false;
+            }
+
+            var email = document.getElementById("email").value;
+            var emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+
+            if (!emailRegex.test(email)) {
+                document.getElementById("email-invalid-feedback").style.display = "block";
+                return false;
+            } else {
+                document.getElementById("email-invalid-feedback").style.display = "none";
+            }
+
+            return true;
+        }
+        function togglePasswordVisibility() {
+            var passwordInput = document.getElementById("pwd");
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+            } else {
+                passwordInput.type = "password";
+            }
+        }
+    </script>
+</body>
+</html>

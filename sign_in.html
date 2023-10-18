@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Inn - Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url('https://assets.brandinside.asia/uploads/2023/01/animals-cropped-scaled.jpg');
+            background-size: cover;
+        }
+        .container {
+            text-align: left;
+            display: inline-block;
+        }
+        .header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-start;
+            padding: 20px;
+        }
+        .logo {
+            font-size: 48px;
+            color: #fff; 
+            margin: 0;
+            padding: 10px 20px;
+            border-radius: 10px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            margin: 20px;
+        }
+        .sign-in-form {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.637);
+            text-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            color: #2e2c2c;
+            border-radius: 5px;
+            max-width: 400px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .sign-in-form h2 {
+            margin-top: 0;
+        }
+        .sign-in-form input[type="submit"] {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">Pet Inn</div>
+        </div>
+        <form class="need-validation" id="sign-in-form">
+            <div class="sign-in-form">
+                <h2>Sign In</h2>
+                <div class="mb mt">
+                    <label for="uname" class="form-label"><b>Username:</b></label>
+                    <input type="text" class="form-control" id="uname" placeholder="Enter username" name="uname">
+                    <div class="valid-feedback">Valid.</div>
+                    <div class="invalid-feedback">Please fill out this field.</div>
+                </div>
+                <div class="mb">
+                    <label for="pwd" class="form-label"><b>Password:</b></label>
+                    <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd" minlength="8">
+                    <div class="valid-feedback">Valid.</div>
+                    <div class="invalid-feedback">Please fill out this field.</div>
+                </div>
+                <div class="mb mt">
+                    <label for="showPassword" id="showPasswordLabel">
+                        <input type="checkbox" id="showPassword"> Show Password
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="myCheck"  name="remember" required>
+                    <label class="form-check-label" for="myCheck">I agree to the terms and conditions.</label>
+                    <div class="valid-feedback">Valid.</div>
+                    <div class="invalid-feedback">Click this checkbox to continue.</div>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <a href="#" id="forgotPassword">Forgot Password?</a>
+                <div class="message-box" id="messageBox"></div>
+            </div>
+        </form>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#sign-in-form").submit(function(event) {
+                const email = $("#uname").val();
+                const password = $("#pwd").val();
+
+                if (email === "" && password !== "") {
+                    event.preventDefault();
+                    alert("Please fill the username.");
+                } else if (email !== "" && password === "") {
+                    event.preventDefault();
+                    alert("Please fill the password.");
+                } else if (email === "" && password === "") {
+                    event.preventDefault();
+                    alert("Please enter both username and password.");
+                }
+            });
+            $("#showPassword").on("change", function() {
+                var passwordInput = $("#pwd");
+                if (this.checked) {
+                    passwordInput.attr("type", "text");
+                } else {
+                    passwordInput.attr("type", "password");
+                }
+            });
+
+            $(".sign-in-form").hide().fadeIn(2000);
+            $("#forgotPassword").click(function(event) {
+                event.preventDefault();
+                $("#messageBox").text("Please contact support for password recovery.").fadeIn().delay(3000).fadeOut();
+            });
+        });
+    </script>
+</body>
+</html>
